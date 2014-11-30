@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>JSON-ROA Browser</title>
+    <link href="assets/stylesheets/main-47473ae1.css" rel="stylesheet" type="text/css" />
+    <script src="assets/javascripts/vendor-e89cd8c6.js" type="text/javascript"></script>
+    <script src="assets/javascripts/app-4f237e4e.js" type="text/javascript"></script>
+  </head>
+  <body class='index'>
+    <div class='container-fluid'>
+      <nav class='navbar navbar-default' role='navigation'>
+        <div class='navbar-header'>
+          <a class='navbar-brand' href='index.html'>
+            The JSON-ROA Browser
+          </a>
+        </div>
+        <div class='navbar-collapse collapse'>
+          <ul class='nav navbar-nav'>
+            <li>
+              <a href='about.html'>About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id='alerts'>
+        <div id='nojs-alert'>
+          <div class='alert alert-danger'>
+            <p>
+              <strong>
+                JavaScript is not enabled!
+              </strong>
+            </p>
+            <p>
+              The
+              <em>JSON-ROA Browser</em>
+              is a single page application depending on Javascript.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='modal' id='error-modal'>
+        <div class='modal-dialog'>
+          <div class='modal-content panel-danger'>
+            <div class='modal-header panel-heading'>
+              <button aria_hidden class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h class='modal-title text-danger'>ERROR!</h>
+            </div>
+            <div class='modal-body'>
+              <p>
+                Something unexpected happened. The following might lead to the cause:
+              </p>
+              <pre class='source-code small'></pre>
+              <p>
+                It is also advisable to inspect the
+                <strong>console of your browser.</strong>
+                There might be information to which the
+                <em>JSON-ROA Browser</em>
+                has no access to. This applies in particular to
+                <strong>security settings</strong>
+                and to
+                <strong>
+                  <em>Cross-Origin Resource Sharing.</em>
+                </strong>
+              </p>
+            </div>
+            <div class='modal-footer'>
+              <button class='btn btn-warning' data-dismiss='modal' type='button'>Dismiss</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='modal fade' id='confirm-modal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button aria_hidden class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h class='modal-title'>Confirm</h>
+            </div>
+            <form id='confirm-form' role='form'>
+              <div class='modal-body'></div>
+              <div class='modal-footer clearfix'>
+                <button class='pull-left btn btn-default' data-dismiss='modal' type='button'>Abort</button>
+                <button class='pull-right btn btn-warning' type='submit'>Continue</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class='modal fade' id='post-put-modal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button aria_hidden class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h class='modal-title'>POST / PUT</h>
+            </div>
+            <form id='put-form' role='form'>
+              <div class='modal-body'>
+                <p class='url'></p>
+                <div class='form-group'>
+                  <label>Content-Type</label>
+                  <input class='content-type form-control' type='text' value='application/json'>
+                </div>
+                <div class='form-group'>
+                  <label>Content</label>
+                  <textarea class='content form-control'>{"message": "Hello World!"}</textarea>
+                </div>
+              </div>
+              <div class='modal-footer clearfix'>
+                <button class='pull-left btn btn-default' data-dismiss='modal' type='button'>Abort</button>
+                <button class='pull-right btn btn-warning' type='submit'>POST / PUT</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class='modal fade' id='url-expansion-modal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button aria_hidden class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h class='modal-title'>Templated URL Expansion</h>
+            </div>
+            <form id='url-expansion-form' role='form'>
+              <div class='modal-body'>
+                <p>
+                  The url
+                  <code class='url small' id='templated-url'></code>
+                  is templated, see
+                  <a href='http://tools.ietf.org/html/rfc6570'>
+                    RFC6570 URI Template.
+                  </a>
+                </p>
+                <p>
+                  The parameters can be submitted via the following JSON data.
+                  Values of
+                  <code>null</code>
+                  will remove the corresponding parameter.
+                </p>
+                <div class='form-group'>
+                  <label for='url-parameters-input'>URL parameters (JSON)</label>
+                  <textarea class='form-control' id='url-parameters-input' rows='10'></textarea>
+                </div>
+              </div>
+              <div class='modal-footer'>
+                <button class='btn btn-warning' data-dismiss='modal' type='button'>Abort</button>
+                <button autofocus class='btn btn-primary' type='submit'>Continue</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6' id='request'>
+          <h2>Request</h2>
+          <form id='request-form' role='form'>
+            <div class='form-group'>
+              <label for='request-headers'>Request Headers</label>
+              <textarea class='form-control small' id='request-headers'>Accept: application/json-roa+json;q=1, application/json;q=0.8, text/*;q=0.5, */*;q=0.1</textarea>
+            </div>
+            <div class='form-group'>
+              <div class='input-group'>
+                <input class='form-control small' id='url' type='text'>
+                <span class='input-group-btn'>
+                  <button class='btn btn-primary' id='get' type='submit'>&nbsp; GET &nbsp;</button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <h2>
+            <span class='resource-name' id='resource-name'></span>
+            Resource
+          </h2>
+          <div class='panel panel-warning' id='self-relation'>
+            <table class='table table-striped table-condensed'>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class='panel panel-warning' id='collection'>
+            <div class='panel-heading clearfix'>
+              <div class='pull-left'>
+                <span class='resource-name'></span>
+                Collection
+              </div>
+              <div class='btn-group pull-right'>
+                <a class='btn btn-xs btn-primary' id='next'>
+                  Next
+                  <i class='fa fa-arrow-circle-right'></i>
+                </a>
+              </div>
+            </div>
+            <table class='table table-striped table-condensed'>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class='panel panel-warning' id='relations'>
+            <div class='panel-heading'>
+              <span class='resource-name'></span>
+              Relations
+            </div>
+            <table class='table table-striped table-condensed'>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class='col-md-6' id='response'>
+          <h2>Response</h2>
+          <div id='response-alerts'>
+            <div id='response-status'></div>
+          </div>
+          <div class='panel panel-default' id='response-headers-panel'>
+            <div class='panel-heading clearfix'>
+              <div class='pull-left'>Headers</div>
+            </div>
+            <div class='panel-body source-code'>
+              <pre class='source-code small pre-scrollable' id='response-headers'></pre>
+            </div>
+          </div>
+          <div class='panel panel-info' id='response-json-data-panel'>
+            <div class='panel-heading'>JSON Data</div>
+            <div class='panel-body source-code'>
+              <pre class='source-code small pre-scrollable' id='response-json-data'></pre>
+            </div>
+          </div>
+          <div class='panel panel-info' id='response-json-roa-panel'>
+            <div class='panel-heading'>JSON-ROA Data</div>
+            <div class='panel-body source-code'>
+              <pre class='source-code small pre-scrollable' id='response-json-roa'></pre>
+            </div>
+          </div>
+          <div class='panel panel-default' id='response-text-panel'>
+            <div class='panel-heading clearfix'>
+              <div class='pull-left'>Text</div>
+            </div>
+            <div class='panel-body source-code'>
+              <pre class='source-code small pre-scrollable' id='response-text'></pre>
+            </div>
+          </div>
+          <div class='panel panel-default no-padding-panel' id='response-content-panel'>
+            <div class='panel-heading clearfix'>
+              <div class='pull-left'>
+                Content Iframe
+                <span class='text-warning'>(uses browser accept header!)</span>
+              </div>
+              <div class='pull-right'>
+                <a class='btn btn-default btn-xs' id='open-content'>
+                  <i class='fa fa-arrows-alt'></i>
+                </a>
+              </div>
+            </div>
+            <div class='panel-body'>
+              <iframe id='iframe' style='width: 100%'></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
