@@ -1,78 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta content='width=device-width, initial-scale=1' name='viewport'>
-    <title>JSON-ROA Browser</title>
-    <link href="assets/stylesheets/main-47473ae1.css" rel="stylesheet" type="text/css" />
-    <script src="assets/javascripts/vendor-e89cd8c6.js" type="text/javascript"></script>
-    <script src="assets/javascripts/app-43f3b04d.js" type="text/javascript"></script>
-  </head>
-  <body class='about'>
-    <div class='container-fluid'>
-      <nav class='navbar navbar-default' role='navigation'>
-        <div class='navbar-header'>
-          <a class='navbar-brand' href='index.html'>
-            The JSON-ROA Browser
-            <em>(BETA)</em>
-          </a>
-        </div>
-        <div class='navbar-collapse collapse'>
-          <ul class='nav navbar-nav'>
-            <li>
-              <a href='about.html'>About</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      
-      <h1 id="about-the-json-roa-browser">About The JSON-ROA Browser</h1>
-      
-      <p><em>The JSON-ROA Browser</em> enables you to quickly explore and understand
-      <a href="http://json-roa.github.io/">JSON-ROA</a> enabled APIs.</p>
-      
-      <h2 id="status">Status</h2>
-      
-      <p>See <a href="version.html">version</a>.</p>
-      
-      <h2 id="copyright">Copyright</h2>
-      <p>© Thomas Schank 2014; <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#068;&#114;&#084;&#111;&#109;&#064;&#083;&#099;&#104;&#097;&#110;&#107;&#046;&#099;&#104;">&#068;&#114;&#084;&#111;&#109;&#064;&#083;&#099;&#104;&#097;&#110;&#107;&#046;&#099;&#104;</a>, <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#084;&#104;&#111;&#109;&#097;&#115;&#046;&#083;&#099;&#104;&#097;&#110;&#107;&#064;&#097;&#108;&#103;&#111;&#099;&#111;&#110;&#046;&#099;&#104;">&#084;&#104;&#111;&#109;&#097;&#115;&#046;&#083;&#099;&#104;&#097;&#110;&#107;&#064;&#097;&#108;&#103;&#111;&#099;&#111;&#110;&#046;&#099;&#104;</a></p>
-      
-      <h2 id="license">License</h2>
-      
-      <p><em>The JSON-ROA Browser</em> is released to the public under the terms of the
-      <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
-      
-      <h2 id="runtime-includes">Runtime Includes</h2>
-      
-      <p>The <a href="https://github.com/json-roa/json-roa_browser_build">build of <em>The JSON-ROA Browser</em></a> includes the following runtime
-      components:</p>
-      
-      <ul>
-        <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
-        <li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
-        <li><a href="http://momentjs.com/">Moment.js</a></li>
-        <li><a href="http://underscorejs.org/">UNDERSCORE.js</a></li>
-        <li><a href="http://medialize.github.io/URI.js/">URI.js</a></li>
-        <li><a href="https://github.com/johan/format-json">format-json</a></li>
-        <li><a href="http://jquery.com/">jQuery</a></li>
-        <li><a href="https://github.com/geraintluff/uri-templates">uri-templates</a></li>
-      </ul>
-      
-      <p>Each of those comes with its own license. </p>
-      
-      <h2 id="build-dependencies">Build Dependencies</h2>
-      
-      <p><em>The JSON-ROA Browser</em> is build with following fine tools: </p>
-      
-      <ul>
-        <li><a href="http://browserify.org/">Browserify</a></li>
-        <li><a href="https://github.com/netzpirat/haml_coffee_assets">Haml Coffee Assets</a></li>
-        <li><a href="http://haml.info/">Haml</a></li>
-        <li><a href="http://middlemanapp.com/">Middleman</a></li>
-        <li><a href="https://www.npmjs.org/">NPM</a></li>
-        <li><a href="http://sass-lang.com/">Sass</a></li>
-      </ul>
-    </div>
-  </body>
+<head>
+<meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<title>JSON-ROA Browser</title>
+<link href="assets/stylesheets/main-9d8b1021.css" rel="stylesheet" type="text/css" />
+<script src="assets/javascripts/vendor-d8d921a8.js" type="text/javascript"></script>
+<script src="assets/javascripts/app-f9286313.js" type="text/javascript"></script>
+</head>
+<body class='about'>
+<div class='container-fluid'>
+<nav class='navbar navbar-default' role='navigation'>
+<div class='navbar-header'>
+<a class='navbar-brand' href='index.html'>
+The JSON-ROA Browser
+<span class='major'>1</span><span>.</span><span class='minor'>0</span><span>.</span><span class='minor'>0</span><span class='minor'></span><span class='minor'></span>
+</a>
+</div>
+<div class='navbar-collapse collapse'>
+<ul class='nav navbar-nav'>
+<li>
+<a href='about.html'>About</a>
+</li>
+</ul>
+</div>
+</nav>
+
+<h1 id="about-the-json-roa-browser">About The JSON-ROA Browser</h1>
+
+<p><em>The JSON-ROA Browser</em> enables you to quickly explore and understand
+<a href="http://json-roa.github.io/">JSON-ROA</a> enabled APIs.</p>
+
+<h2 id="status">Status</h2>
+
+<p>See <a href="version.html">version</a>.</p>
+
+<h2 id="restrictions">Restrictions</h2>
+
+<p>Programming against an API from a browser based application imposes security
+restrictions given by the browser. This is in particular true with respect to
+<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS</a> and <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>.</p>
+
+<p>It is in some cases impossible for the JSON-ROA Browser to report the original
+HTTP error or to detect the cause of a problem.</p>
+
+<p class="text-warning">If something is not working as expected and an unspecified error is shown,
+please have a look in your browser logs. This can give some indication to the
+underlying problem.</p>
+
+<p class="text-info">We recommend to embed the JSON-ROA browser directly into the application to
+avoid <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS</a> restrictions. The <a href="https://github.com/json-roa">JSON-ROA github organization</a> makes a <a href="https://github.com/json-roa/json-roa_browser_build">build
+of the JSON-ROA browser</a> available to be included i.e. as a git submodule.</p>
+
+<h2 id="copyright">Copyright</h2>
+<p>Copyright © 2014, 2015 Thomas Schank</p>
+
+<h2 id="license">License</h2>
+
+<p><em>The JSON-ROA Browser</em> is released to the public under the terms of the
+<a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+<h2 id="runtime-includes">Runtime Includes</h2>
+
+<p>The <a href="https://github.com/json-roa/json-roa_browser_build">build of <em>The JSON-ROA Browser</em></a> includes the following runtime
+components:</p>
+
+<ul>
+  <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+  <li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
+  <li><a href="http://momentjs.com/">Moment.js</a></li>
+  <li><a href="http://underscorejs.org/">UNDERSCORE.js</a></li>
+  <li><a href="http://medialize.github.io/URI.js/">URI.js</a></li>
+  <li><a href="https://github.com/johan/format-json">format-json</a></li>
+  <li><a href="http://jquery.com/">jQuery</a></li>
+  <li><a href="https://github.com/geraintluff/uri-templates">uri-templates</a></li>
+</ul>
+
+<p>Each of those comes with its own license.</p>
+
+<h2 id="build-dependencies">Build Dependencies</h2>
+
+<p><em>The JSON-ROA Browser</em> is build with following tools:</p>
+
+<ul>
+  <li><a href="http://browserify.org/">Browserify</a></li>
+  <li><a href="https://github.com/netzpirat/haml_coffee_assets">Haml Coffee Assets</a></li>
+  <li><a href="http://haml.info/">Haml</a></li>
+  <li><a href="http://middlemanapp.com/">Middleman</a></li>
+  <li><a href="https://www.npmjs.org/">NPM</a></li>
+  <li><a href="http://sass-lang.com/">Sass</a></li>
+</ul>
+
+
+</div>
+</body>
 </html>
